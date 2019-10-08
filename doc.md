@@ -1,4 +1,17 @@
+
+See logs monitoring
+  * fluentd
+
+- prometheus
+  * node_exporter
+  * alertmanager
+  * pushgateway
+  * consul_exporter 
+
+- grafana
+
 KEY=~/.ssh/id_rsa-github  git  clone git@github.com:davidboukari/ansible-roles.git
+
 # Start prometheus
 ./prometheus --config.file=prometheus.yml
 
@@ -11,14 +24,6 @@ Building:
     ./node_exporter -h
     make test
 
-
-- prometheus
-  * node_exporter
-  * alertmanager
-  * pushgateway
-  * consul_exporter 
-
-- grafana
 
 
 
