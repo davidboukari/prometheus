@@ -8,6 +8,8 @@ See logs monitoring
   * pushgateway
   * consul_exporter 
 
+for node_exporter install go here: https://golang.org/dl/
+
 - grafana
 
 KEY=~/.ssh/id_rsa-github  git  clone git@github.com:davidboukari/ansible-roles.git
