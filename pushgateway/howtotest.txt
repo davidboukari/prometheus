@@ -2,3 +2,12 @@ If the push gateway is started on localhost to push a mymetric with a value to m
 
 echo "mymetric 3.14" | curl --data-binary @- http://localhost:9091/metrics/job/myjob
 echo "mymetric 6.28" | curl --data-binary @- http://localhost:9091/metrics/job/myjob
+
+Other example:
+cat <<EOF | curl --data-binary @- http://pushgateway.example.org:9091/metrics/job/some_job/instance/some_instance
+  # TYPE some_metric counter
+  some_metric{label="val1"} 42
+  # TYPE another_metric gauge
+  # HELP another_metric Just an example.
+  another_metric 2398.283
+  EOF
