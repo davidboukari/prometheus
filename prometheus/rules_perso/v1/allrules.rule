@@ -1,0 +1,42 @@
+serverFiles:
+  rules: ""
+  alerts: |-
+    # Rules for Node
+    ALERT high_node_load
+      IF node_load1 > 20
+      FOR 10s
+      LABELS { severity = "critical" }
+      ANNOTATIONS {
+          # summary defines the status if the condition is met
+          summary = "Node usage exceeded threshold",
+          # description reports the situation of event
+          description = "Instance {{ $labels.instance }}, Job {{ $labels.job }}, Node load {{ $value }}",
+          # type defines the type of the resource causing the event
+          type = "Server",
+      }
+
+    ALERT high_memory_usage
+      IF (( node_memory_MemTotal - node_memory_MemFree ) / node_memory_MemTotal) * 100 > 100
+      FOR 10s
+      LABELS { severity = "warning" }
+      ANNOTATIONS {
+          # summary defines the status if the condition is met
+          summary = "Memory usage exceeded threshold",
+          # description reports the situation of event
+          description = "Instance {{ $labels.instance }}, Job {{ $labels.job }}, Memory usage {{ humanize $value }}%",
+          # type defines the type of the resource causing the event
+          type = "Server",
+      }
+
+    ALERT high_storage_usage
+      IF (node_filesystem_size{fstype="ext4"} - node_filesystem_free{fstype="ext4"}) / node_filesystem_size{fstype="ext4"}  * 100 > 90
+      FOR 10s
+      LABELS { severity = "warning" }
+      ANNOTATIONS {
+          # summary defines the status if the condition is met
+          summary = "Storage usage exceeded threshold",
+          # description reports the situation of event
+          description = "Instance {{ $labels.instance }}, Job {{ $labels.job }}, Storage usage {{ humanize $value }}%",
+          # type defines the type of the resource causing the event
+          type = "Storage",
+      }

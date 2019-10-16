@@ -1,0 +1,8 @@
+ALERT MemoryUsage
+  IF ((node_memory_MemTotal-node_memory_MemFree-node_memory_Cached)/(node_memory_MemTotal)*100) > 95
+  FOR 10m
+  LABELS { severity = "warning" }
+  ANNOTATIONS {
+    summary = "Instance {{$labels.instance}} is in danger",
+    description = "RAM of {{$labels.instance}} has been too used for more than 10 minutes"
+  }

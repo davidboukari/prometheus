@@ -1,0 +1,16 @@
+groups:
+- name: memory.rules
+  rules:
+  - alert: Memory
+    expr: (sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes + node_memory_Buffers_bytes
+      + node_memory_Cached_bytes)) / sum(node_memory_MemTotal_bytes) * 100 > 85
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      title: "Warning Alert: Memory Usage"
+      description: Node host memory usage is {{ humanize $value}}%. Reported by
+        instance {{ $labels.instance }} of job {{ $labels.job }}.
+      summary: Server memory is almost full
+      node_load: "{{ $value }}"
+

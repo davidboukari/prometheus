@@ -1,0 +1,31 @@
+groups:
+- name: storage.rules
+  rules:
+  - alert: StorageUsageCritical
+    #expr: (node_filesystem_size_byte{fstype="aufs"} - node_filesystem_free_byte{fstype="aufs"}) / node_filesystem_size_byte{fstype="aufs"} * 100 > 17
+    expr: (node_filesystem_size_bytes{fstype="xfs"} - node_filesystem_avail_bytes{fstype="xfs"}) / node_filesystem_size_bytes{fstype="xfs"} * 100 > 48
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      title: "Critical Alert: Storage usage"
+      description: Node host storage usage is {{ humanize $value}}%. Reported by
+        instance {{ $labels.instance }} of job {{ $labels.job }}.
+      summary: Server storage is almost full
+      node_load: "{{ $value }}"
+
+
+  - alert: StorageUsageWarning
+    #expr: (node_filesystem_size_byte{fstype="aufs"} - node_filesystem_free_byte{fstype="aufs"}) / node_filesystem_size_byte{fstype="aufs"} * 100 > 17
+    expr: (node_filesystem_size_bytes{fstype="xfs"} - node_filesystem_avail_bytes{fstype="xfs"}) / node_filesystem_size_bytes{fstype="xfs"} * 100 > 18
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      title: "Warning Alert: Storage usage"
+      description: Node host storage usage is {{ humanize $value}}%. Reported by
+        instance {{ $labels.instance }} of job {{ $labels.job }}.
+      summary: Server storage is almost full
+      node_load: "{{ $value }}"
+
+

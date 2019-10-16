@@ -1,0 +1,11 @@
+ - alert: high_memory_load
+    expr: (sum(node_memory_MemTotal) - sum(node_memory_MemFree + node_memory_Buffers
+      + node_memory_Cached)) / sum(node_memory_MemTotal) * 100 > 85
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      description: Docker host memory usage is {{ humanize $value}}%. Reported by
+        instance {{ $labels.instance }} of job {{ $labels.job }}.
+      summary: Server memory is almost full
+      type: Server

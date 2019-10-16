@@ -1,0 +1,11 @@
+- alert: high_storage_load
+    expr: (node_filesystem_size{fstype="aufs"} - node_filesystem_free{fstype="aufs"})
+      / node_filesystem_size{fstype="aufs"} * 100 > 85
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      description: Docker host storage usage is {{ humanize $value}}%. Reported by
+        instance {{ $labels.instance }} of job {{ $labels.job }}.
+      summary: Server storage is almost full
+       type: Server

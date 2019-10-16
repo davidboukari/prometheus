@@ -1,0 +1,15 @@
+groups:
+- name: cpu_load.rules
+  rules:
+  - alert: highcpuload
+      expr: node_load1{environment="gprd",job="node",type="git"} > 60
+      for: 30s
+      labels:
+        severity: critical
+      annotations:
+        title: "Warning CPU Load !!!"
+        description: "Docker host is under high load, the avg load 1m is at {{ $value}}.
+          Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+        node_load: '{{ $value }}'
+        #summary: Server under high load
+        #type: Server

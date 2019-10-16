@@ -1,0 +1,16 @@
+groups:
+- name: cpu_load.rules
+  rules:
+  - alert: CpuLoad
+    expr: node_load1 > 60
+    for: 30s
+    labels:
+      severity: crtitical
+    annotations:
+      title: "Emergency Alert: CPU load"
+      description: 
+        "Node host is under high load, the avg load 60s is at {{ $value}}.
+          Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+      summary: Server under high load
+      node_load: "{{ $value }}"
+
