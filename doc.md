@@ -22,6 +22,7 @@ See logs monitoring
   prometheus port: 9090
   node-exporter: 9100
   pushgateway: 9091
+  blackbox_exporter :9115
 
 For all source need go to compil 
   - git@github.com:prometheus/prometheus.git  
