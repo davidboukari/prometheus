@@ -1,0 +1,4 @@
+If the push gateway is started on localhost to push a mymetric with a value to myjob
+
+echo "mymetric 3.14" | curl --data-binary @- http://localhost:9091/metrics/job/myjob
+echo "mymetric 6.28" | curl --data-binary @- http://localhost:9091/metrics/job/myjob
