@@ -40,9 +40,9 @@ For all source need go to compil
   password: admin
 
   To reset pwd: 
+  https://blog.moncoindunet.fr/open-source/grafana/grafana-remettre-le-mot-de-passe-admin-a-sa-valeur-par-defaut/
   connect on grafana db
 update user set password = '59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6', salt = 'F3FAxVm33R' where login = 'admin';
-
 
 for node_exporter install go here: https://golang.org/dl/
 
